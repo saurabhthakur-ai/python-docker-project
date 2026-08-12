@@ -122,11 +122,26 @@ git clone <repository-url>
 cd python-docker-project
 ```
 
-### 2. Create a Virtual Environment
+### 2. Create and Activate a Virtual Environment
+
+#### Windows (PowerShell)
+
+```powershell
+python -m venv venv
+venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+```
+
+> If activation fails with an execution-policy error, run PowerShell as Administrator and execute:
+> ```powershell
+> Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser
+> ```
+
+#### macOS / Linux
 
 ```bash
 python -m venv venv
-source venv/bin/activate        # On Windows: venv\Scripts\activate
+source venv/bin/activate
 pip install -r requirements.txt
 ```
 
