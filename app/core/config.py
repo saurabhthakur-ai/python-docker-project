@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     host: str = "0.0.0.0"
     port: int = 8000
     database_url: str = "postgresql://user:password@db:5432/appdb"
+    secret_key: str = "change-me-in-production"
+    algorithm: str = "HS256"
+    access_token_expire_minutes: int = 30
     aws_region: str = "us-east-1"
     aws_ecr_repository: str = "python-docker-app"
     aws_ecs_cluster: str = "python-docker-cluster"
