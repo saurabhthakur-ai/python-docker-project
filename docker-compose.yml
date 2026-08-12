@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: python-backend:dev
+    env_file:
+      - .env
+    environment:
+      APP_ENV: development
+      DEBUG: "true"
+      LOG_LEVEL: DEBUG
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount source so edits are reflected immediately (used with the Flask dev server below)
+      - ./app:/app/app:ro
+    # Override the production gunicorn CMD with the Flask built-in dev server for live-reload
+    command: ["python", "-m", "app.main"]
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c",
+             "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
