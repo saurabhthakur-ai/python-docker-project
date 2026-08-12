@@ -1,6 +1,6 @@
 """Application configuration."""
 
-from pydantic_settings import BaseSettings
+from pydantic_settings import BaseSettings, SettingsConfigDict
 
 
 class Settings(BaseSettings):
@@ -17,9 +17,10 @@ class Settings(BaseSettings):
     aws_ecs_cluster: str = "python-docker-cluster"
     aws_ecs_service: str = "python-docker-service"
 
-    class Config:
-        env_file = ".env"
-        env_file_encoding = "utf-8"
+    model_config = SettingsConfigDict(
+        env_file=".env",
+        env_file_encoding="utf-8",
+    )
 
 
 settings = Settings()
